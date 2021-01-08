@@ -6,14 +6,19 @@
 //
 
 import UIKit
+import CoreData
 
 class FavoritesVC: UIViewController {
-
+    
     @IBOutlet weak var favoritesCollectionView: UICollectionView!
+    private var favoritesArray = [Favorite]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         configureCollectionViewFavorites()
+        getFavorites()
+        
     }
     
     // MARK: Private Functions
@@ -26,29 +31,60 @@ class FavoritesVC: UIViewController {
         favoritesCollectionView.delegate = self
         favoritesCollectionView.dataSource = self
     }
+    
+    private func getFavorites() {
+        favoritesArray.removeAll()
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Favorites")
+        fetchRequest.returnsObjectsAsFaults = false
+        
+        do {
+            let results = try context.fetch(fetchRequest)
+            var mtitle = ""
+            var mposter = ""
+            var mrating = 0
+            var mdate = ""
+            if results.count > 0 {
+                for result in results as! [NSManagedObject]{
+                    if let title = result.value(forKey: "gameTitle") as? String {
+                        mtitle = title
+                    }
+                    if let poster = result.value(forKey: "gamePoster") as? String {
+                        mposter = poster
+                    }
+                    if let rating = result.value(forKey: "rating") as? Int {
+                        mrating = rating
+                    }
+                    if let date = result.value(forKey: "relasedDate") as? String {
+                        mdate = date
+                    }
+                    self.favoritesArray.append(Favorite(title: mtitle, poster: mposter, rating: mrating, date: mdate))
+                    self.favoritesCollectionView.reloadData()
+                }
+                
+                
+            }
+        } catch {
+            print("error!")
+        }
+    }
 }
 
 // MARK: - UICollectionViewDelegate
 extension FavoritesVC: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        collectionView.deselectItem(at: indexPath, animated: true)
-
-        guard let cell = collectionView.cellForItem(at: indexPath) as? FavoritesCollectionViewCell else {return}
-//        guard let gameName = cell.gameTitleLabel.text else {return}
-//        chosenGameId = cityNameIdDictionary[gameName] ?? 0
-    }
 }
 // MARK: - UICollectionViewDataSource
 extension FavoritesVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AppConstant.collectionViewCellFavorites, for: indexPath) as! FavoritesCollectionViewCell
-//        cell.configure(response: resultsResponse?[indexPath.row + 3])
+        cell.configure(favorite: favoritesArray[indexPath.row])
         return cell
         
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return favoritesArray.count
     }
 }
 

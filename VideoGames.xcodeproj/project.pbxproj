@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		59771E9B25A8EB9600A8BFDB /* FavoritesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59771E9925A8EB9600A8BFDB /* FavoritesCollectionViewCell.swift */; };
+		59771E9C25A8EB9600A8BFDB /* FavoritesCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 59771E9A25A8EB9600A8BFDB /* FavoritesCollectionViewCell.xib */; };
 		5978B8C925A611CA00A167E3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5978B8C825A611CA00A167E3 /* AppDelegate.swift */; };
 		5978B8CD25A611CA00A167E3 /* VideoGamesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5978B8CC25A611CA00A167E3 /* VideoGamesVC.swift */; };
 		5978B8D325A611CA00A167E3 /* VideoGames.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5978B8D125A611CA00A167E3 /* VideoGames.xcdatamodeld */; };
@@ -34,12 +36,15 @@
 		5978B95325A77A5E00A167E3 /* GameDetailResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5978B95225A77A5E00A167E3 /* GameDetailResponseModel.swift */; };
 		59B0265B25A88C8100FDE109 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B0265A25A88C8100FDE109 /* Theme.swift */; };
 		59B0266625A89ED600FDE109 /* FavoritesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B0266525A89ED600FDE109 /* FavoritesVC.swift */; };
-		59B0266D25A89FE000FDE109 /* FavoritesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B0266C25A89FE000FDE109 /* FavoritesCollectionViewCell.swift */; };
+		59B0267025A8A29900FDE109 /* FavoriteCollectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 59B0266F25A8A29900FDE109 /* FavoriteCollectionView.xib */; };
+		59B0267725A8A8F000FDE109 /* FavoriteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B0267625A8A8F000FDE109 /* FavoriteModel.swift */; };
 		F80FDE5A53781E8D5D7893CA /* Pods_VideoGames.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0D4B4BC739A1D88CA65527B /* Pods_VideoGames.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		06935848FED8D8E8F6901034 /* Pods-VideoGames.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VideoGames.release.xcconfig"; path = "Target Support Files/Pods-VideoGames/Pods-VideoGames.release.xcconfig"; sourceTree = "<group>"; };
+		59771E9925A8EB9600A8BFDB /* FavoritesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesCollectionViewCell.swift; sourceTree = "<group>"; };
+		59771E9A25A8EB9600A8BFDB /* FavoritesCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FavoritesCollectionViewCell.xib; sourceTree = "<group>"; };
 		5978B8C525A611CA00A167E3 /* VideoGames.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VideoGames.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5978B8C825A611CA00A167E3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5978B8CC25A611CA00A167E3 /* VideoGamesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoGamesVC.swift; sourceTree = "<group>"; };
@@ -69,7 +74,8 @@
 		5978B95225A77A5E00A167E3 /* GameDetailResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDetailResponseModel.swift; sourceTree = "<group>"; };
 		59B0265A25A88C8100FDE109 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		59B0266525A89ED600FDE109 /* FavoritesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesVC.swift; sourceTree = "<group>"; };
-		59B0266C25A89FE000FDE109 /* FavoritesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesCollectionViewCell.swift; sourceTree = "<group>"; };
+		59B0266F25A8A29900FDE109 /* FavoriteCollectionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FavoriteCollectionView.xib; sourceTree = "<group>"; };
+		59B0267625A8A8F000FDE109 /* FavoriteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteModel.swift; sourceTree = "<group>"; };
 		A0D4B4BC739A1D88CA65527B /* Pods_VideoGames.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VideoGames.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D81FF1270C60EA5911FE7150 /* Pods-VideoGames.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VideoGames.debug.xcconfig"; path = "Target Support Files/Pods-VideoGames/Pods-VideoGames.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -154,6 +160,7 @@
 				5978B90C25A742CB00A167E3 /* VideoGamesCollectionViewCell.xib */,
 				5978B94725A7625400A167E3 /* Slide.xib */,
 				5978B94A25A7626100A167E3 /* Slide.swift */,
+				59B0266F25A8A29900FDE109 /* FavoriteCollectionView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -182,6 +189,7 @@
 		5978B8F325A7385300A167E3 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				59B0267625A8A8F000FDE109 /* FavoriteModel.swift */,
 				5978B93625A755A500A167E3 /* IndicatorView.swift */,
 				59B0265A25A88C8100FDE109 /* Theme.swift */,
 			);
@@ -239,7 +247,8 @@
 			isa = PBXGroup;
 			children = (
 				59B0266525A89ED600FDE109 /* FavoritesVC.swift */,
-				59B0266C25A89FE000FDE109 /* FavoritesCollectionViewCell.swift */,
+				59771E9925A8EB9600A8BFDB /* FavoritesCollectionViewCell.swift */,
+				59771E9A25A8EB9600A8BFDB /* FavoritesCollectionViewCell.xib */,
 			);
 			path = FavoritesScene;
 			sourceTree = "<group>";
@@ -314,10 +323,12 @@
 			files = (
 				5978B8D825A611CC00A167E3 /* LaunchScreen.storyboard in Resources */,
 				5978B8FC25A73A8700A167E3 /* VideoGameDetail.storyboard in Resources */,
+				59771E9C25A8EB9600A8BFDB /* FavoritesCollectionViewCell.xib in Resources */,
 				5978B8E225A611FB00A167E3 /* VideoGames.storyboard in Resources */,
 				5978B8D525A611CC00A167E3 /* Assets.xcassets in Resources */,
 				5978B90E25A742CB00A167E3 /* VideoGamesCollectionViewCell.xib in Resources */,
 				5978B94825A7625400A167E3 /* Slide.xib in Resources */,
+				59B0267025A8A29900FDE109 /* FavoriteCollectionView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -379,10 +390,11 @@
 				5978B91725A750B800A167E3 /* VideoGamesNetwork.swift in Sources */,
 				5978B93725A755A500A167E3 /* IndicatorView.swift in Sources */,
 				5978B90825A7417B00A167E3 /* AppConstant.swift in Sources */,
+				59771E9B25A8EB9600A8BFDB /* FavoritesCollectionViewCell.swift in Sources */,
 				5978B8C925A611CA00A167E3 /* AppDelegate.swift in Sources */,
+				59B0267725A8A8F000FDE109 /* FavoriteModel.swift in Sources */,
 				5978B8D325A611CA00A167E3 /* VideoGames.xcdatamodeld in Sources */,
 				59B0266625A89ED600FDE109 /* FavoritesVC.swift in Sources */,
-				59B0266D25A89FE000FDE109 /* FavoritesCollectionViewCell.swift in Sources */,
 				5978B8E725A6E39600A167E3 /* SceneDelegate.swift in Sources */,
 				5978B95325A77A5E00A167E3 /* GameDetailResponseModel.swift in Sources */,
 				5978B91325A74D6B00A167E3 /* VideoGamesService.swift in Sources */,

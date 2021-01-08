@@ -7,6 +7,7 @@
 
 import UIKit
 import Kingfisher
+import CoreData
 
 class VideoGameDetailVC: UIViewController {
     
@@ -26,6 +27,7 @@ class VideoGameDetailVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+        createCloseBarButtonItem()
     }
     
     // MARK: Private Functions
@@ -45,8 +47,16 @@ class VideoGameDetailVC: UIViewController {
         isFavorite = !isFavorite
         if isFavorite {
             favoriteImageView.image = UIImage(named: "heart")
+            
         } else {
             favoriteImageView.image = UIImage(named: "favorite")
         }
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        let favorite = NSEntityDescription.insertNewObject(forEntityName: "Favorites", into: context)
+        favorite.setValue(detailGameResponse?.released, forKey: "relasedDate")
+        favorite.setValue(detailGameResponse?.metacritic, forKey: "rating")
+        favorite.setValue(detailGameResponse?.name, forKey: "gameTitle")
+        favorite.setValue(detailGameResponse?.background_image, forKey: "gamePoster")
     }
 }

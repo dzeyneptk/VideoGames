@@ -20,4 +20,16 @@ extension UIViewController {
         self.present(alertController, animated: true, completion: nil)
       }
     
+    func createCloseBarButtonItem() {
+       let backButton = UIButton(type: .custom)
+       backButton.setImage(UIImage(named: "icoClose"), for: .normal)
+       backButton.tintColor = .white
+       backButton.frame = CGRect(x: 0, y: 0, width: 24, height: 24)
+       backButton.addTarget(self, action: #selector(navCloseButtonTapped), for: .touchUpInside)
+       let backNavBar = UIBarButtonItem(customView: backButton)
+       self.navigationItem.leftBarButtonItem = backNavBar
+   }
+    @objc func navCloseButtonTapped() {
+        self.dismiss(animated: true, completion: nil)
+    }
 }

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="hDs-Uy-ica" customClass="FavoritesCollectionViewCell" customModule="VideoGames" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="253" height="113"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="253" height="113"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Da6-8b-NwN">
+                        <rect key="frame" x="90" y="41" width="163" height="16"/>
+                        <color key="backgroundColor" red="1" green="0.58680474760000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="16" id="Sif-ZG-GiD"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zdg-B8-OVd">
+                        <rect key="frame" x="90" y="55" width="41.5" height="16"/>
+                        <color key="backgroundColor" red="1" green="0.58680474760000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="16" id="c3d-NG-upc"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9cX-HY-TNs">
+                        <rect key="frame" x="141.5" y="55" width="111.5" height="16"/>
+                        <color key="backgroundColor" red="1" green="0.58680474760000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="16" id="Czy-3j-LEB"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="square.and.pencil" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="awr-IA-NQV">
+                        <rect key="frame" x="0.0" y="41" width="80" height="28.5"/>
+                        <color key="backgroundColor" red="0.58999999999999997" green="0.11" blue="0.12" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="80" id="3gj-KO-gaF"/>
+                            <constraint firstAttribute="height" constant="30" id="8Ek-UO-x3u"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="J0i-dw-FbO"/>
+            <color key="backgroundColor" red="0.06057945067" green="0.2581694162" blue="0.077924737980000006" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="awr-IA-NQV" secondAttribute="bottom" constant="42" id="FzK-Ag-2bw"/>
+                <constraint firstAttribute="trailing" secondItem="9cX-HY-TNs" secondAttribute="trailing" id="JNT-5l-qdf"/>
+                <constraint firstItem="9cX-HY-TNs" firstAttribute="bottom" secondItem="awr-IA-NQV" secondAttribute="bottom" id="QeD-JX-i2g"/>
+                <constraint firstItem="Da6-8b-NwN" firstAttribute="leading" secondItem="awr-IA-NQV" secondAttribute="trailing" constant="10" id="R8Y-fm-giU"/>
+                <constraint firstItem="awr-IA-NQV" firstAttribute="leading" secondItem="hDs-Uy-ica" secondAttribute="leading" id="SKZ-e6-NRw"/>
+                <constraint firstAttribute="trailing" secondItem="Da6-8b-NwN" secondAttribute="trailing" id="Zo5-Re-Aj2"/>
+                <constraint firstItem="9cX-HY-TNs" firstAttribute="leading" secondItem="Zdg-B8-OVd" secondAttribute="trailing" constant="10" id="jwR-yP-0NQ"/>
+                <constraint firstItem="9cX-HY-TNs" firstAttribute="leading" secondItem="Zdg-B8-OVd" secondAttribute="trailing" constant="10" id="lHe-r3-tUv"/>
+                <constraint firstItem="awr-IA-NQV" firstAttribute="top" secondItem="hDs-Uy-ica" secondAttribute="top" constant="41" id="sMQ-EK-U0w"/>
+                <constraint firstItem="Zdg-B8-OVd" firstAttribute="leading" secondItem="awr-IA-NQV" secondAttribute="trailing" constant="10" id="swD-u1-oMf"/>
+                <constraint firstItem="Zdg-B8-OVd" firstAttribute="bottom" secondItem="awr-IA-NQV" secondAttribute="bottom" id="tth-D9-ahp"/>
+                <constraint firstItem="Da6-8b-NwN" firstAttribute="top" secondItem="awr-IA-NQV" secondAttribute="top" id="w2p-i8-K8H"/>
+                <constraint firstAttribute="trailing" secondItem="Da6-8b-NwN" secondAttribute="trailing" id="xpo-a7-G3D"/>
+            </constraints>
+            <size key="customSize" width="253" height="113"/>
+            <connections>
+                <outlet property="gameRatingLabel" destination="Zdg-B8-OVd" id="XEe-xx-XXs"/>
+                <outlet property="gameReleasedLabel" destination="9cX-HY-TNs" id="BrR-Yd-tAJ"/>
+                <outlet property="gameTitleLabel" destination="Da6-8b-NwN" id="XoA-xo-zGQ"/>
+                <outlet property="posterImageView" destination="awr-IA-NQV" id="rWE-dT-ugB"/>
+            </connections>
+            <point key="canvasLocation" x="298" y="26"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="square.and.pencil" catalog="system" width="128" height="115"/>
+    </resources>
+</document>
