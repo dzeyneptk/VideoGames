@@ -10,4 +10,5 @@ import Foundation
 let BASE_URL = "https://api.rawg.io/api"
 struct AppConstant {
     static let collectionViewCellVideoGames = "VideoGamesCollectionViewCell"
+    static let collectionViewCellFavorites = "FavoritesCollectionViewCell"
 }

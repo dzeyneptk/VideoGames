@@ -31,6 +31,10 @@
 		5978B93A25A7561900A167E3 /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5978B93925A7561900A167E3 /* UIViewController+Extensions.swift */; };
 		5978B94825A7625400A167E3 /* Slide.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5978B94725A7625400A167E3 /* Slide.xib */; };
 		5978B94B25A7626100A167E3 /* Slide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5978B94A25A7626100A167E3 /* Slide.swift */; };
+		5978B95325A77A5E00A167E3 /* GameDetailResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5978B95225A77A5E00A167E3 /* GameDetailResponseModel.swift */; };
+		59B0265B25A88C8100FDE109 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B0265A25A88C8100FDE109 /* Theme.swift */; };
+		59B0266625A89ED600FDE109 /* FavoritesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B0266525A89ED600FDE109 /* FavoritesVC.swift */; };
+		59B0266D25A89FE000FDE109 /* FavoritesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B0266C25A89FE000FDE109 /* FavoritesCollectionViewCell.swift */; };
 		F80FDE5A53781E8D5D7893CA /* Pods_VideoGames.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0D4B4BC739A1D88CA65527B /* Pods_VideoGames.framework */; };
 /* End PBXBuildFile section */
 
@@ -62,6 +66,10 @@
 		5978B93925A7561900A167E3 /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		5978B94725A7625400A167E3 /* Slide.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Slide.xib; sourceTree = "<group>"; };
 		5978B94A25A7626100A167E3 /* Slide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Slide.swift; sourceTree = "<group>"; };
+		5978B95225A77A5E00A167E3 /* GameDetailResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDetailResponseModel.swift; sourceTree = "<group>"; };
+		59B0265A25A88C8100FDE109 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		59B0266525A89ED600FDE109 /* FavoritesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesVC.swift; sourceTree = "<group>"; };
+		59B0266C25A89FE000FDE109 /* FavoritesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesCollectionViewCell.swift; sourceTree = "<group>"; };
 		A0D4B4BC739A1D88CA65527B /* Pods_VideoGames.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VideoGames.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D81FF1270C60EA5911FE7150 /* Pods-VideoGames.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VideoGames.debug.xcconfig"; path = "Target Support Files/Pods-VideoGames/Pods-VideoGames.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -128,6 +136,7 @@
 				5978B91F25A7517100A167E3 /* ErrorResponse.swift */,
 				5978B92A25A7534B00A167E3 /* BaseResponseModel.swift */,
 				5978B92D25A753A700A167E3 /* ResultsResponseModel.swift */,
+				5978B95225A77A5E00A167E3 /* GameDetailResponseModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -152,6 +161,7 @@
 		5978B8F125A7384300A167E3 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				59B0266425A89EBA00FDE109 /* FavoritesScene */,
 				5978B8F625A73A5300A167E3 /* VideoGameDetailScene */,
 				5978B8F525A73A3A00A167E3 /* VideoGamesScene */,
 			);
@@ -173,6 +183,7 @@
 			isa = PBXGroup;
 			children = (
 				5978B93625A755A500A167E3 /* IndicatorView.swift */,
+				59B0265A25A88C8100FDE109 /* Theme.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -222,6 +233,15 @@
 				5978B93925A7561900A167E3 /* UIViewController+Extensions.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		59B0266425A89EBA00FDE109 /* FavoritesScene */ = {
+			isa = PBXGroup;
+			children = (
+				59B0266525A89ED600FDE109 /* FavoritesVC.swift */,
+				59B0266C25A89FE000FDE109 /* FavoritesCollectionViewCell.swift */,
+			);
+			path = FavoritesScene;
 			sourceTree = "<group>";
 		};
 		9A2E3CF6598409676CD55491 /* Pods */ = {
@@ -361,11 +381,15 @@
 				5978B90825A7417B00A167E3 /* AppConstant.swift in Sources */,
 				5978B8C925A611CA00A167E3 /* AppDelegate.swift in Sources */,
 				5978B8D325A611CA00A167E3 /* VideoGames.xcdatamodeld in Sources */,
+				59B0266625A89ED600FDE109 /* FavoritesVC.swift in Sources */,
+				59B0266D25A89FE000FDE109 /* FavoritesCollectionViewCell.swift in Sources */,
 				5978B8E725A6E39600A167E3 /* SceneDelegate.swift in Sources */,
+				5978B95325A77A5E00A167E3 /* GameDetailResponseModel.swift in Sources */,
 				5978B91325A74D6B00A167E3 /* VideoGamesService.swift in Sources */,
 				5978B91D25A7511800A167E3 /* VideoGamesNetworkError.swift in Sources */,
 				5978B92E25A753A700A167E3 /* ResultsResponseModel.swift in Sources */,
 				5978B94B25A7626100A167E3 /* Slide.swift in Sources */,
+				59B0265B25A88C8100FDE109 /* Theme.swift in Sources */,
 				5978B92725A7525700A167E3 /* DateFormatter+Extensions.swift in Sources */,
 				5978B91A25A750ED00A167E3 /* BaseNetwork.swift in Sources */,
 			);

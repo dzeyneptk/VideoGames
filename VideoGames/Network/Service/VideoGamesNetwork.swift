@@ -9,18 +9,23 @@ import Moya
 
 let MServiceProvider = MoyaProvider<VideoGamesService>()
 
-class MoodifyNetwork : BaseNetwork {
+class VideoGamesNetwork : BaseNetwork {
     
-    private static let instance = MoodifyNetwork()
+    private static let instance = VideoGamesNetwork()
     
-    public static var shared : MoodifyNetwork {
+    public static var shared : VideoGamesNetwork {
         return instance
     }
     
-    func getTracks( success : @escaping NetworkSuccessBlock<BaseResponseModel> , failure : NetworkFailureBlock?){
+    func getGames( success : @escaping NetworkSuccessBlock<BaseResponseModel> , failure : NetworkFailureBlock?){
         MServiceProvider.request(VideoGamesService.games) { (result) in
             super.processResponse(result: result, success: success, failure: failure)
         }
     }
     
+    func getGameDetails(  _ gameId : String , success : @escaping NetworkSuccessBlock<GameDetailResponseModel> , failure : NetworkFailureBlock?){
+        MServiceProvider.request(VideoGamesService.gameDetailsByGameId(gameId)) { (result) in
+            super.processResponse(result: result, success: success, failure: failure)
+        }
+    }
 }

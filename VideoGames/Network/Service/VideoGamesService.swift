@@ -10,6 +10,7 @@ import Moya
 
 public enum VideoGamesService {
     case games
+    case gameDetailsByGameId( _ gameId : String)
 }
 
 extension VideoGamesService: TargetType {
@@ -19,13 +20,17 @@ extension VideoGamesService: TargetType {
     
     public var path: String {
         switch self {
-        case .games: return "/games"
+        case .games:
+            return "/games"
+        case .gameDetailsByGameId(let gameId):
+            return "/games/\(gameId)"
         }
     }
     
     public var method: Moya.Method {
         switch self {
-        case .games: return .get
+        case .games, .gameDetailsByGameId:
+            return .get
         }
     }
     
@@ -36,7 +41,7 @@ extension VideoGamesService: TargetType {
     public var task: Task {
 
         switch self {
-        case .games:
+        case .games, .gameDetailsByGameId:
             return .requestPlain
         }
     }

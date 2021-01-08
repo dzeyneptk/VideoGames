@@ -4,35 +4,46 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Item 2-->
         <scene sceneID="bcr-9Z-AmR">
             <objects>
-                <viewController id="kcc-rV-e1O" sceneMemberID="viewController">
+                <viewController id="kcc-rV-e1O" customClass="FavoritesVC" customModule="VideoGames" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VU1-Wf-L1a">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <pageControl opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" hidesForSinglePage="YES" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="QYV-Hp-bXt">
-                                <rect key="frame" x="167" y="520" width="123" height="28"/>
-                                <color key="backgroundColor" red="0.58999999999999997" green="0.58999999999999997" blue="0.12" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="28" id="EBJ-Md-l67"/>
-                                    <constraint firstAttribute="width" constant="123" id="EgG-Va-kw4"/>
-                                </constraints>
-                                <color key="currentPageIndicatorTintColor" red="1" green="0.58680474760000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </pageControl>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="E8X-0j-skN">
+                                <rect key="frame" x="0.0" y="44" width="414" height="769"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Oda-nG-Y1C">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="edk-jK-Zi1">
+                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Yek-6V-ia3">
+                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </collectionViewCellContentView>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="md4-r1-lOt"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" red="0.58999999999999997" green="0.58999999999999997" blue="0.12" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="md4-r1-lOt" firstAttribute="bottom" secondItem="QYV-Hp-bXt" secondAttribute="bottom" constant="265" id="0WP-cR-4dH"/>
-                            <constraint firstItem="QYV-Hp-bXt" firstAttribute="top" secondItem="md4-r1-lOt" secondAttribute="top" constant="476" id="4Tj-gb-UlV"/>
-                            <constraint firstItem="md4-r1-lOt" firstAttribute="trailing" secondItem="QYV-Hp-bXt" secondAttribute="trailing" constant="124" id="7gC-rv-YSL"/>
-                            <constraint firstItem="QYV-Hp-bXt" firstAttribute="leading" secondItem="md4-r1-lOt" secondAttribute="leading" constant="167" id="jj0-SJ-dmy"/>
+                            <constraint firstItem="E8X-0j-skN" firstAttribute="top" secondItem="md4-r1-lOt" secondAttribute="top" id="FgL-Q4-vmK"/>
+                            <constraint firstItem="md4-r1-lOt" firstAttribute="bottom" secondItem="E8X-0j-skN" secondAttribute="bottom" id="LCw-hl-PFu"/>
+                            <constraint firstItem="md4-r1-lOt" firstAttribute="trailing" secondItem="E8X-0j-skN" secondAttribute="trailing" id="i9i-yX-vWh"/>
+                            <constraint firstItem="E8X-0j-skN" firstAttribute="leading" secondItem="md4-r1-lOt" secondAttribute="leading" id="iBo-Zw-VwS"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item 2" id="Bs2-dz-P74"/>
@@ -137,9 +148,4 @@
             <point key="canvasLocation" x="-417" y="251"/>
         </scene>
     </scenes>
-    <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-    </resources>
 </document>

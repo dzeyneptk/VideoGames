@@ -9,14 +9,22 @@ import UIKit
 import NVActivityIndicatorView
 import Kingfisher
 
+protocol GameSelectDelegate {
+    func onGameSelected(gameId: Int)
+}
+
 class VideoGamesVC: UIViewController {
     
     // MARK: - Private Variables
     private var resultsResponse: [ResultsResponseModel]?
+    private var detailResultsResponse: GameDetailResponseModel?
     private var slides : [Slide] = []
     private var slide1 : Slide = Bundle.main.loadNibNamed("Slide", owner: self, options: nil)?.first as! Slide
     private var slide2 : Slide = Bundle.main.loadNibNamed("Slide", owner: self, options: nil)?.first as! Slide
     private var slide3 : Slide = Bundle.main.loadNibNamed("Slide", owner: self, options: nil)?.first as! Slide
+    private var cityNameIdDictionary = [String: Int]()
+    var delegate: GameSelectDelegate?
+    var chosenGameId = 0
     
     // MARK: - IBOutlets
     @IBOutlet weak var searchTextField: UITextField!
@@ -49,9 +57,14 @@ class VideoGamesVC: UIViewController {
     
     private func configureVideoGamesNetwork() {
         LoadingIndicator.shared.show()
-        MoodifyNetwork.shared.getTracks { [weak self] (response) in
+        VideoGamesNetwork.shared.getGames { [weak self] (response) in
             guard let self = self else {return}
             self.resultsResponse = response.results
+            if let results = self.resultsResponse {
+                for index in results.indices  {
+                    self.cityNameIdDictionary[results[index].name ?? ""] = results[index].id
+                }
+            }
             self.configureCollectionViewGames()
             self.configurePagerPosters()
             LoadingIndicator.shared.hide()
@@ -59,6 +72,27 @@ class VideoGamesVC: UIViewController {
             self.alert(message: error.message)
             LoadingIndicator.shared.hide()
         }
+    }
+    
+    private func configureGameDetailNetwork(gameId: String) {
+        LoadingIndicator.shared.show()
+        VideoGamesNetwork.shared.getGameDetails(gameId) { (response) in
+            self.detailResultsResponse = response
+            LoadingIndicator.shared.hide()
+            self.openDetailVC()
+        } failure: { (error) in
+            self.alert(message: error.message)
+            LoadingIndicator.shared.hide()
+        }
+
+    }
+    
+    private func openDetailVC() {
+        guard let detailVC = UIStoryboard(name: "VideoGameDetail", bundle: nil).instantiateViewController(withIdentifier: "Gamedetail") as? VideoGameDetailVC else {return}
+        let detailNav = UINavigationController(rootViewController: detailVC)
+        detailNav.modalPresentationStyle = .fullScreen
+        detailVC.detailGameResponse = detailResultsResponse
+        self.present(detailNav, animated: true, completion: nil)
     }
     
     private func configurePagerPosters() {
@@ -87,14 +121,18 @@ class VideoGamesVC: UIViewController {
 extension VideoGamesVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
-        // item selected
+
+        guard let cell = collectionView.cellForItem(at: indexPath) as? VideoGamesCollectionViewCell else {return}
+        guard let gameName = cell.gameTitleLabel.text else {return}
+        chosenGameId = cityNameIdDictionary[gameName] ?? 0
+        configureGameDetailNetwork(gameId: String(chosenGameId))
     }
 }
 // MARK: - UICollectionViewDataSource
 extension VideoGamesVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AppConstant.collectionViewCellVideoGames, for: indexPath) as! VideoGamesCollectionViewCell
-        cell.configure(response: resultsResponse?[indexPath.row])
+        cell.configure(response: resultsResponse?[indexPath.row + 3])
         return cell
         
     }
