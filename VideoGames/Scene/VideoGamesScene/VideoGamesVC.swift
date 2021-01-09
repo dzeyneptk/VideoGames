@@ -55,20 +55,25 @@ class VideoGamesVC: UIViewController {
         gamesCollectionView.reloadData()
     }
     
-    
-    //    override func viewDidAppear(_ animated: Bool) {
-    //        super.viewDidAppear(animated)
-    //
-    //        let searchTextField:UITextField = searchBar.subviews[0].subviews.last as! UITextField
-    //        searchTextField.layer.cornerRadius = 15
-    //        searchTextField.textAlignment = NSTextAlignment.left
-    //        let image:UIImage = UIImage(named: "search")!
-    //        let imageView:UIImageView = UIImageView.init(image: image)
-    //        searchTextField.leftView = nil
-    //        searchTextField.placeholder = "Search"
-    //        searchTextField.rightView = imageView
-    //        searchTextField.rightViewMode = UITextField.ViewMode.always
-    //    }
+    override func viewDidLayoutSubviews() {
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.orange]
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).backgroundColor = .clear
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).attributedPlaceholder = NSAttributedString(string: "Search", attributes: [NSAttributedString.Key.foregroundColor: UIColor.orange])
+        if let textfield = searchBar.value(forKey: "searchField") as? UITextField {
+            let image:UIImage = UIImage(named: "loupe")!
+            let imageView:UIImageView = UIImageView.init(image: image)
+            textfield.leftView = nil
+            textfield.rightView = imageView
+            textfield.rightViewMode = UITextField.ViewMode.always
+            let border = CALayer()
+            let borderWidth = CGFloat(1.0)
+            border.borderColor = UIColor.orange.cgColor
+            border.frame = CGRect(x: 0, y: textfield.frame.size.height - borderWidth, width: textfield.frame.size.width, height: textfield.frame.size.height)
+            border.borderWidth = borderWidth
+            textfield.layer.addSublayer(border)
+            textfield.layer.masksToBounds = true
+        }
+    }
     
     // MARK: Private Functions
     private func configureCollectionViewGames() {
@@ -88,7 +93,9 @@ class VideoGamesVC: UIViewController {
         searchBar.isUserInteractionEnabled = true
         searchBar.sizeToFit()
         definesPresentationContext = true
-        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.orange]
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).backgroundColor = .clear
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).attributedPlaceholder = NSAttributedString(string: "Search", attributes: [NSAttributedString.Key.foregroundColor: UIColor.orange])
     }
     
     private func configureUI() {
@@ -98,13 +105,6 @@ class VideoGamesVC: UIViewController {
         headerGamesPageControl.currentPage = 0
         view.bringSubviewToFront(headerGamesPageControl)
         setupSlideScrollView(slides: slides)
-        //        if let textfield = searchBar.value(forKey: "searchField") as? UITextField {
-        //            textfield.attributedPlaceholder = NSAttributedString(string: textfield.placeholder ?? "", attributes: [NSAttributedString.Key.foregroundColor : UIColor.orange])
-        //            if let rightView = textfield.rightView as? UIImageView {
-        //                rightView.image = rightView.image?.withRenderingMode(.alwaysTemplate)
-        //                rightView.tintColor = UIColor.orange
-        //            }
-        //        }
     }
     
     private func configureVideoGamesNetwork() {
