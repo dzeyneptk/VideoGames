@@ -8,6 +8,7 @@
 import UIKit
 import NVActivityIndicatorView
 import Kingfisher
+import CoreData
 
 protocol GameSelectDelegate {
     func onGameSelected(gameId: Int)
@@ -18,31 +19,56 @@ class VideoGamesVC: UIViewController {
     // MARK: - Private Variables
     private var resultsResponse: [ResultsResponseModel]?
     private var detailResultsResponse: GameDetailResponseModel?
+    private var uiResponse: [ResultsResponseModel]?
     private var slides : [Slide] = []
     private var slide1 : Slide = Bundle.main.loadNibNamed("Slide", owner: self, options: nil)?.first as! Slide
     private var slide2 : Slide = Bundle.main.loadNibNamed("Slide", owner: self, options: nil)?.first as! Slide
     private var slide3 : Slide = Bundle.main.loadNibNamed("Slide", owner: self, options: nil)?.first as! Slide
     private var cityNameIdDictionary = [String: Int]()
+    private var isEmpty = true
+    private var favoritesArray = [FavoriteModel]()
     var delegate: GameSelectDelegate?
     var chosenGameId = 0
     
     // MARK: - IBOutlets
-    @IBOutlet weak var searchTextField: UITextField!
+    //  @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet weak var headerGamesScroll: UIScrollView!
     @IBOutlet weak var headerGamesPageControl: UIPageControl!
     @IBOutlet weak var gamesCollectionView: UICollectionView!
+    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var notFoundLabel: UILabel!
+    
     
     // MARK: -  Override Func
     override func viewDidLoad() {
         super.viewDidLoad()
         configureVideoGamesNetwork()
-        headerGamesScroll.delegate = self
-        slides = createSlides()
-        headerGamesPageControl.numberOfPages = slides.count
-        headerGamesPageControl.currentPage = 0
-        view.bringSubviewToFront(headerGamesPageControl)
-        setupSlideScrollView(slides: slides)
+        configureUI()
+        configureSearchbar()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // movieDetailVM.delegate = self
+        isEmpty = true
+        searchBar.text = ""
+        gamesCollectionView.reloadData()
+    }
+    
+    
+    //    override func viewDidAppear(_ animated: Bool) {
+    //        super.viewDidAppear(animated)
+    //
+    //        let searchTextField:UITextField = searchBar.subviews[0].subviews.last as! UITextField
+    //        searchTextField.layer.cornerRadius = 15
+    //        searchTextField.textAlignment = NSTextAlignment.left
+    //        let image:UIImage = UIImage(named: "search")!
+    //        let imageView:UIImageView = UIImageView.init(image: image)
+    //        searchTextField.leftView = nil
+    //        searchTextField.placeholder = "Search"
+    //        searchTextField.rightView = imageView
+    //        searchTextField.rightViewMode = UITextField.ViewMode.always
+    //    }
     
     // MARK: Private Functions
     private func configureCollectionViewGames() {
@@ -55,11 +81,37 @@ class VideoGamesVC: UIViewController {
         gamesCollectionView.dataSource = self
     }
     
+    private func configureSearchbar(){
+        searchBar.delegate = self
+        searchBar.placeholder = "Search"
+        searchBar.searchBarStyle = .minimal
+        searchBar.isUserInteractionEnabled = true
+        searchBar.sizeToFit()
+        definesPresentationContext = true
+    }
+    
+    private func configureUI() {
+        headerGamesScroll.delegate = self
+        slides = createSlides()
+        headerGamesPageControl.numberOfPages = slides.count
+        headerGamesPageControl.currentPage = 0
+        view.bringSubviewToFront(headerGamesPageControl)
+        setupSlideScrollView(slides: slides)
+        //        if let textfield = searchBar.value(forKey: "searchField") as? UITextField {
+        //            textfield.attributedPlaceholder = NSAttributedString(string: textfield.placeholder ?? "", attributes: [NSAttributedString.Key.foregroundColor : UIColor.orange])
+        //            if let rightView = textfield.rightView as? UIImageView {
+        //                rightView.image = rightView.image?.withRenderingMode(.alwaysTemplate)
+        //                rightView.tintColor = UIColor.orange
+        //            }
+        //        }
+    }
+    
     private func configureVideoGamesNetwork() {
         LoadingIndicator.shared.show()
         VideoGamesNetwork.shared.getGames { [weak self] (response) in
             guard let self = self else {return}
             self.resultsResponse = response.results
+            self.uiResponse = response.results
             if let results = self.resultsResponse {
                 for index in results.indices  {
                     self.cityNameIdDictionary[results[index].name ?? ""] = results[index].id
@@ -84,7 +136,7 @@ class VideoGamesVC: UIViewController {
             self.alert(message: error.message)
             LoadingIndicator.shared.hide()
         }
-
+        
     }
     
     private func openDetailVC() {
@@ -121,7 +173,6 @@ class VideoGamesVC: UIViewController {
 extension VideoGamesVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
-
         guard let cell = collectionView.cellForItem(at: indexPath) as? VideoGamesCollectionViewCell else {return}
         guard let gameName = cell.gameTitleLabel.text else {return}
         chosenGameId = cityNameIdDictionary[gameName] ?? 0
@@ -132,13 +183,17 @@ extension VideoGamesVC: UICollectionViewDelegate {
 extension VideoGamesVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AppConstant.collectionViewCellVideoGames, for: indexPath) as! VideoGamesCollectionViewCell
-        cell.configure(response: resultsResponse?[indexPath.row + 3])
+        if headerGamesScroll.isHidden {
+            cell.configure(response: uiResponse?[indexPath.row])
+        } else {
+            cell.configure(response: uiResponse?[indexPath.row + 3])
+        }
         return cell
         
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return resultsResponse != nil ? resultsResponse!.count : 0
+        return uiResponse != nil ? uiResponse!.count : 0
     }
 }
 
@@ -146,8 +201,7 @@ extension VideoGamesVC: UICollectionViewDataSource {
 extension VideoGamesVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize{
         let width = self.gamesCollectionView.frame.width
-        let height = self.gamesCollectionView.frame.height / 2
-        return CGSize(width: width, height: height)
+        return CGSize(width: width, height: 120)
         
     }
 }
@@ -157,5 +211,52 @@ extension VideoGamesVC: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let pageIndex = round(scrollView.contentOffset.x/view.frame.width)
         headerGamesPageControl.currentPage = Int(pageIndex)
+    }
+}
+
+// MARK: - UISearchDelegate
+extension VideoGamesVC: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        return true
+    }
+    
+    func searchBarIsEmpty() -> Bool {
+        return searchBar.text?.isEmpty ?? true
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        self.searchBar.showsCancelButton = true
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        self.isEmpty = true
+        searchBar.showsCancelButton = false
+        searchBar.text = ""
+        searchBar.resignFirstResponder()
+        self.gamesCollectionView.reloadData()
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        headerGamesScroll.isHidden = !searchBarIsEmpty()
+        headerGamesPageControl.isHidden = !searchBarIsEmpty()
+        if(searchBarIsEmpty()){
+            self.isEmpty = true
+            searchBar.text = ""
+            showGames(games: resultsResponse)
+        } else {
+            self.isEmpty = false
+            if let resultList = self.resultsResponse?.filter({ (response) -> Bool in
+                (response.name?.lowercased().contains(searchText.lowercased()))!
+            }) {
+                showGames(games: resultList)
+                notFoundLabel.isHidden = resultList.count > 0
+            }
+        }
+    }
+    
+    private func showGames(games: [ResultsResponseModel]?) {
+        self.uiResponse = games
+        self.gamesCollectionView.reloadData()
+        self.notFoundLabel.isHidden = true
     }
 }

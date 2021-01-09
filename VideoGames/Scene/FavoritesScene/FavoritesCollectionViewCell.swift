@@ -21,7 +21,7 @@ class FavoritesCollectionViewCell: UICollectionViewCell {
     }
     
     // MARK: - Functions
-    func configure(favorite: Favorite?) {
+    func configure(favorite: FavoriteModel?) {
         posterImageView.kf.setImage(with: URL(string: favorite?.poster ?? ""))
         gameTitleLabel.text = favorite?.title
         gameRatingLabel.text = String(favorite?.rating ?? 0)

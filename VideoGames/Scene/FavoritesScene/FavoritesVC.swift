@@ -11,14 +11,17 @@ import CoreData
 class FavoritesVC: UIViewController {
     
     @IBOutlet weak var favoritesCollectionView: UICollectionView!
-    private var favoritesArray = [Favorite]()
+    private var favoritesArray = [FavoriteModel]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         configureCollectionViewFavorites()
         getFavorites()
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getFavorites()
     }
     
     // MARK: Private Functions
@@ -38,7 +41,6 @@ class FavoritesVC: UIViewController {
         let context = appDelegate.persistentContainer.viewContext
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Favorites")
         fetchRequest.returnsObjectsAsFaults = false
-        
         do {
             let results = try context.fetch(fetchRequest)
             var mtitle = ""
@@ -59,11 +61,9 @@ class FavoritesVC: UIViewController {
                     if let date = result.value(forKey: "relasedDate") as? String {
                         mdate = date
                     }
-                    self.favoritesArray.append(Favorite(title: mtitle, poster: mposter, rating: mrating, date: mdate))
+                    self.favoritesArray.append(FavoriteModel(title: mtitle, poster: mposter, rating: mrating, date: mdate))
                     self.favoritesCollectionView.reloadData()
                 }
-                
-                
             }
         } catch {
             print("error!")
@@ -92,8 +92,7 @@ extension FavoritesVC: UICollectionViewDataSource {
 extension FavoritesVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize{
         let width = self.favoritesCollectionView.frame.width
-        let height = self.favoritesCollectionView.frame.height / 2
-        return CGSize(width: width, height: height)
+        return CGSize(width: width, height: 120)
         
     }
 }

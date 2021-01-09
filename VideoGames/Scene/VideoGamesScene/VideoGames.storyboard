@@ -16,8 +16,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="E8X-0j-skN">
-                                <rect key="frame" x="0.0" y="44" width="414" height="769"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="E8X-0j-skN">
+                                <rect key="frame" x="20" y="44" width="374" height="769"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Oda-nG-Y1C">
                                     <size key="itemSize" width="128" height="128"/>
@@ -38,15 +38,15 @@
                             </collectionView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="md4-r1-lOt"/>
-                        <color key="backgroundColor" red="0.58999999999999997" green="0.58999999999999997" blue="0.12" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.11" green="0.11" blue="0.12" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="E8X-0j-skN" firstAttribute="top" secondItem="md4-r1-lOt" secondAttribute="top" id="FgL-Q4-vmK"/>
                             <constraint firstItem="md4-r1-lOt" firstAttribute="bottom" secondItem="E8X-0j-skN" secondAttribute="bottom" id="LCw-hl-PFu"/>
-                            <constraint firstItem="md4-r1-lOt" firstAttribute="trailing" secondItem="E8X-0j-skN" secondAttribute="trailing" id="i9i-yX-vWh"/>
-                            <constraint firstItem="E8X-0j-skN" firstAttribute="leading" secondItem="md4-r1-lOt" secondAttribute="leading" id="iBo-Zw-VwS"/>
+                            <constraint firstItem="md4-r1-lOt" firstAttribute="trailing" secondItem="E8X-0j-skN" secondAttribute="trailing" constant="20" id="i9i-yX-vWh"/>
+                            <constraint firstItem="E8X-0j-skN" firstAttribute="leading" secondItem="md4-r1-lOt" secondAttribute="leading" constant="20" id="iBo-Zw-VwS"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" id="Bs2-dz-P74"/>
+                    <tabBarItem key="tabBarItem" title="" image="suit.heart.fill" catalog="system" id="Bs2-dz-P74"/>
                     <connections>
                         <outlet property="favoritesCollectionView" destination="E8X-0j-skN" id="T4S-vY-c9u"/>
                     </connections>
@@ -55,7 +55,7 @@
             </objects>
             <point key="canvasLocation" x="471" y="676"/>
         </scene>
-        <!--Item 1-->
+        <!--Video GamesVC-->
         <scene sceneID="NkP-PA-hiM">
             <objects>
                 <viewController id="ZAh-iN-U4c" customClass="VideoGamesVC" customModule="VideoGames" customModuleProvider="target" sceneMemberID="viewController">
@@ -63,28 +63,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UVx-ca-eBI">
-                                <rect key="frame" x="20" y="54" width="374" height="34"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="textColor" red="0.58999999999999997" green="0.58999999999999997" blue="0.12" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderLabel.textColor">
-                                        <color key="value" red="0.58999999999999997" green="0.58999999999999997" blue="0.12" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </textField>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="N7F-Cz-0xv">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" ambiguous="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N7F-Cz-0xv">
                                 <rect key="frame" x="87" y="109" width="240" height="128"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="120" id="Wsq-KV-27c"/>
-                                </constraints>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <viewLayoutGuide key="contentLayoutGuide" id="ZnR-JZ-fhX"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="QYc-mc-155"/>
                             </scrollView>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="F4w-qK-RoY">
-                                <rect key="frame" x="20" y="249" width="374" height="554"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="F4w-qK-RoY">
+                                <rect key="frame" x="20" y="371.5" width="374" height="431.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Tuo-lF-JKm">
                                     <size key="itemSize" width="128" height="128"/>
@@ -95,37 +81,54 @@
                                 <cells/>
                             </collectionView>
                             <pageControl opaque="NO" contentMode="scaleToFill" highlighted="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" hidesForSinglePage="YES" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="8zK-bU-KYJ">
-                                <rect key="frame" x="146" y="231" width="123" height="8"/>
+                                <rect key="frame" x="146" y="353.5" width="123" height="8"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="123" id="oky-9b-c0B"/>
                                     <constraint firstAttribute="height" constant="8" id="xYx-9j-5cQ"/>
                                 </constraints>
                             </pageControl>
+                            <searchBar contentMode="redraw" placeholder="Search" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SVp-T9-9e2">
+                                <rect key="frame" x="20" y="54" width="374" height="56"/>
+                                <color key="barTintColor" red="0.11" green="0.11" blue="0.12" alpha="1" colorSpace="calibratedRGB"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Üzgünüz, aradığınız oyun bulunamadı!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rvA-TZ-Gdr">
+                                <rect key="frame" x="62" y="437.5" width="290" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="2rY-cd-d0G"/>
-                        <color key="backgroundColor" red="0.58999999999999997" green="0.58999999999999997" blue="0.12" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.11" green="0.11" blue="0.12" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="rvA-TZ-Gdr" firstAttribute="centerX" secondItem="2Y6-yW-Dyq" secondAttribute="centerX" id="5BE-z7-Rt4"/>
                             <constraint firstItem="N7F-Cz-0xv" firstAttribute="leading" secondItem="2rY-cd-d0G" secondAttribute="leading" constant="20" id="5Ga-3z-Psw"/>
-                            <constraint firstItem="N7F-Cz-0xv" firstAttribute="top" secondItem="UVx-ca-eBI" secondAttribute="bottom" constant="20" id="7gX-4U-SIw"/>
+                            <constraint firstItem="N7F-Cz-0xv" firstAttribute="height" secondItem="2rY-cd-d0G" secondAttribute="height" multiplier="0.3" id="Afa-bv-M9X"/>
                             <constraint firstItem="2rY-cd-d0G" firstAttribute="trailing" secondItem="N7F-Cz-0xv" secondAttribute="trailing" constant="20" id="CyT-Hi-691"/>
                             <constraint firstItem="2rY-cd-d0G" firstAttribute="trailing" secondItem="F4w-qK-RoY" secondAttribute="trailing" constant="20" id="Lz7-sz-57e"/>
                             <constraint firstItem="F4w-qK-RoY" firstAttribute="leading" secondItem="2rY-cd-d0G" secondAttribute="leading" constant="20" id="NE6-5f-IvN"/>
                             <constraint firstItem="F4w-qK-RoY" firstAttribute="top" secondItem="8zK-bU-KYJ" secondAttribute="bottom" constant="10" id="OGb-Qw-P9M"/>
+                            <constraint firstItem="SVp-T9-9e2" firstAttribute="top" secondItem="2rY-cd-d0G" secondAttribute="top" constant="10" id="RV5-x1-CMa"/>
+                            <constraint firstItem="SVp-T9-9e2" firstAttribute="leading" secondItem="2rY-cd-d0G" secondAttribute="leading" constant="20" id="Vip-hn-9ec"/>
                             <constraint firstItem="2rY-cd-d0G" firstAttribute="bottom" secondItem="F4w-qK-RoY" secondAttribute="bottom" constant="10" id="aJM-yq-Ww5"/>
-                            <constraint firstItem="2rY-cd-d0G" firstAttribute="trailing" secondItem="UVx-ca-eBI" secondAttribute="trailing" constant="20" id="as4-84-4Cr"/>
                             <constraint firstItem="8zK-bU-KYJ" firstAttribute="leading" secondItem="2rY-cd-d0G" secondAttribute="leading" constant="146" id="baL-iO-9cF"/>
-                            <constraint firstItem="UVx-ca-eBI" firstAttribute="leading" secondItem="2rY-cd-d0G" secondAttribute="leading" constant="20" id="dsy-eF-iIO"/>
+                            <constraint firstItem="SVp-T9-9e2" firstAttribute="trailing" secondItem="2rY-cd-d0G" secondAttribute="trailing" constant="-20" id="esu-sz-BzO"/>
                             <constraint firstItem="2rY-cd-d0G" firstAttribute="trailing" secondItem="8zK-bU-KYJ" secondAttribute="trailing" constant="145" id="gL0-Pj-Afz"/>
                             <constraint firstItem="8zK-bU-KYJ" firstAttribute="top" secondItem="N7F-Cz-0xv" secondAttribute="bottom" constant="3" id="gaJ-sw-a2e"/>
-                            <constraint firstItem="UVx-ca-eBI" firstAttribute="top" secondItem="2rY-cd-d0G" secondAttribute="top" constant="10" id="kVc-kx-Arw"/>
+                            <constraint firstItem="rvA-TZ-Gdr" firstAttribute="centerY" secondItem="2Y6-yW-Dyq" secondAttribute="centerY" id="kbS-Gj-5KU"/>
+                            <constraint firstItem="N7F-Cz-0xv" firstAttribute="top" secondItem="SVp-T9-9e2" secondAttribute="bottom" constant="10" id="xgx-0W-oR0"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 1" id="8ET-RG-TAA"/>
+                    <tabBarItem key="tabBarItem" title="" image="house.fill" catalog="system" id="8ET-RG-TAA">
+                        <color key="badgeColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBarItem>
                     <connections>
                         <outlet property="gamesCollectionView" destination="F4w-qK-RoY" id="mls-6i-y8d"/>
                         <outlet property="headerGamesPageControl" destination="8zK-bU-KYJ" id="Vee-XM-atW"/>
                         <outlet property="headerGamesScroll" destination="N7F-Cz-0xv" id="8ea-dp-ZOH"/>
-                        <outlet property="searchTextField" destination="UVx-ca-eBI" id="hyz-FT-TZy"/>
+                        <outlet property="notFoundLabel" destination="rvA-TZ-Gdr" id="n5s-Mh-BYr"/>
+                        <outlet property="searchBar" destination="SVp-T9-9e2" id="8tT-Af-rFf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qml-gc-pGe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -136,10 +139,12 @@
         <scene sceneID="WU0-VT-Ini">
             <objects>
                 <tabBarController id="zc9-Ii-PgL" sceneMemberID="viewController">
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="fqM-rh-3W8">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" itemPositioning="centered" id="fqM-rh-3W8">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="selectedImageTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
                         <segue destination="ZAh-iN-U4c" kind="relationship" relationship="viewControllers" id="h1Z-6D-iPA"/>
@@ -151,4 +156,8 @@
             <point key="canvasLocation" x="-417" y="251"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="house.fill" catalog="system" width="128" height="106"/>
+        <image name="suit.heart.fill" catalog="system" width="128" height="109"/>
+    </resources>
 </document>

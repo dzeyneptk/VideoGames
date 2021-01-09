@@ -6,7 +6,7 @@
 //
 
 import Foundation
-struct Favorite {
+struct FavoriteModel {
     let title: String?
     let poster: String?
     let rating: Int?
