@@ -88,6 +88,7 @@ class VideoGamesVC: UIViewController {
         searchBar.isUserInteractionEnabled = true
         searchBar.sizeToFit()
         definesPresentationContext = true
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
     }
     
     private func configureUI() {
@@ -136,7 +137,6 @@ class VideoGamesVC: UIViewController {
             self.alert(message: error.message)
             LoadingIndicator.shared.hide()
         }
-        
     }
     
     private func openDetailVC() {
@@ -151,6 +151,12 @@ class VideoGamesVC: UIViewController {
         slide1.posterImageView.kf.setImage(with: URL(string: resultsResponse?[0].background_image ?? ""))
         slide2.posterImageView.kf.setImage(with: URL(string: resultsResponse?[1].background_image ?? ""))
         slide3.posterImageView.kf.setImage(with: URL(string: resultsResponse?[2].background_image ?? ""))
+        let gesture1 = UITapGestureRecognizer(target: self, action:  #selector(self.gameClicked1))
+        let gesture2 = UITapGestureRecognizer(target: self, action:  #selector(self.gameClicked2))
+        let gesture3 = UITapGestureRecognizer(target: self, action:  #selector(self.gameClicked3))
+        slide1.posterImageView.addGestureRecognizer(gesture1)
+        slide2.posterImageView.addGestureRecognizer(gesture2)
+        slide3.posterImageView.addGestureRecognizer(gesture3)
     }
     
     private func createSlides() -> [Slide] {
@@ -166,6 +172,16 @@ class VideoGamesVC: UIViewController {
             slides[i].frame = CGRect(x: view.frame.width * CGFloat(i), y: 0, width: view.frame.width, height: view.frame.height)
             headerGamesScroll.addSubview(slides[i])
         }
+    }
+    
+    @objc private func gameClicked1() {
+        configureGameDetailNetwork(gameId: String(resultsResponse?[0].id ?? 0))
+    }
+    @objc private func gameClicked2() {
+        configureGameDetailNetwork(gameId: String(resultsResponse?[1].id ?? 0))
+    }
+    @objc private func gameClicked3() {
+        configureGameDetailNetwork(gameId: String(resultsResponse?[2].id ?? 0))
     }
 }
 

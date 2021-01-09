@@ -92,7 +92,7 @@ extension FavoritesVC: UICollectionViewDataSource {
 extension FavoritesVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize{
         let width = self.favoritesCollectionView.frame.width
-        return CGSize(width: width, height: 120)
-        
+        let height = self.favoritesCollectionView.frame.height / 3
+        return CGSize(width: width, height: height)
     }
 }

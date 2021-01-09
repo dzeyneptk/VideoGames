@@ -102,6 +102,5 @@ class VideoGameDetailVC: UIViewController {
             favoriteImageView.image = UIImage(named: "favorite")
             deleteFavorite(gameTitle: detailGameResponse?.name ?? "")
         }
-        
     }
 }
