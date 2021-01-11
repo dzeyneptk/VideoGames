@@ -15,17 +15,13 @@ class VideoGamesCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var gameTitleLabel: UILabel!
     @IBOutlet weak var gameRatingLabel: UILabel!
     @IBOutlet weak var gameReleasedLabel: UILabel!
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
     
     // MARK: - Functions
-    func configure(response: ResultsResponseModel?) {
-        posterImageView.kf.setImage(with: URL(string: response?.background_image ?? ""))
-        gameTitleLabel.text = response?.name
-        gameRatingLabel.text = String(response?.rating ?? 0.0)
-        gameReleasedLabel.text = response?.released
+    func configure(viewModel: ResultsViewModel?) {
+        posterImageView.kf.setImage(with: URL(string: viewModel?.background_image ?? ""))
+        gameTitleLabel.text = viewModel?.name
+        gameRatingLabel.text = String(viewModel?.rating ?? 0.0)
+        gameReleasedLabel.text = viewModel?.released
     }
     
     static func nib() -> UINib {

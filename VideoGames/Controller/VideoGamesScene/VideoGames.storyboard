@@ -67,11 +67,14 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" ambiguous="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N7F-Cz-0xv">
                                 <rect key="frame" x="87" y="109" width="240" height="128"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="I6o-4m-TXW"/>
+                                </constraints>
                                 <viewLayoutGuide key="contentLayoutGuide" id="ZnR-JZ-fhX"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="QYc-mc-155"/>
                             </scrollView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="F4w-qK-RoY">
-                                <rect key="frame" x="20" y="371.5" width="374" height="431.5"/>
+                                <rect key="frame" x="20" y="341" width="374" height="462"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Tuo-lF-JKm">
                                     <size key="itemSize" width="128" height="128"/>
@@ -82,7 +85,7 @@
                                 <cells/>
                             </collectionView>
                             <pageControl opaque="NO" contentMode="scaleToFill" highlighted="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" hidesForSinglePage="YES" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="8zK-bU-KYJ">
-                                <rect key="frame" x="146" y="353.5" width="123" height="8"/>
+                                <rect key="frame" x="146" y="323" width="123" height="8"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="123" id="oky-9b-c0B"/>
                                     <constraint firstAttribute="height" constant="8" id="xYx-9j-5cQ"/>
@@ -111,7 +114,6 @@
                         <constraints>
                             <constraint firstItem="rvA-TZ-Gdr" firstAttribute="centerX" secondItem="2Y6-yW-Dyq" secondAttribute="centerX" id="5BE-z7-Rt4"/>
                             <constraint firstItem="N7F-Cz-0xv" firstAttribute="leading" secondItem="2rY-cd-d0G" secondAttribute="leading" constant="20" id="5Ga-3z-Psw"/>
-                            <constraint firstItem="N7F-Cz-0xv" firstAttribute="height" secondItem="2rY-cd-d0G" secondAttribute="height" multiplier="0.3" id="Afa-bv-M9X"/>
                             <constraint firstItem="2rY-cd-d0G" firstAttribute="trailing" secondItem="N7F-Cz-0xv" secondAttribute="trailing" constant="20" id="CyT-Hi-691"/>
                             <constraint firstItem="2rY-cd-d0G" firstAttribute="trailing" secondItem="F4w-qK-RoY" secondAttribute="trailing" constant="20" id="Lz7-sz-57e"/>
                             <constraint firstItem="F4w-qK-RoY" firstAttribute="leading" secondItem="2rY-cd-d0G" secondAttribute="leading" constant="20" id="NE6-5f-IvN"/>

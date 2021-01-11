@@ -17,39 +17,42 @@ protocol GameSelectDelegate {
 class VideoGamesVC: UIViewController {
     
     // MARK: - Private Variables
-    private var resultsResponse: [ResultsResponseModel]?
+   // private var resultsResponse: [ResultsResponseModel]?
     private var detailResultsResponse: GameDetailResponseModel?
-    private var uiResponse: [ResultsResponseModel]?
+   // private var uiResponse: [ResultsResponseModel]?
     private var slides : [Slide] = []
     private var slide1 : Slide = Bundle.main.loadNibNamed("Slide", owner: self, options: nil)?.first as! Slide
     private var slide2 : Slide = Bundle.main.loadNibNamed("Slide", owner: self, options: nil)?.first as! Slide
     private var slide3 : Slide = Bundle.main.loadNibNamed("Slide", owner: self, options: nil)?.first as! Slide
-    private var cityNameIdDictionary = [String: Int]()
+   // private var gameNameIdDictionary = [String: Int]()
     private var isEmpty = true
     private var favoritesArray = [FavoriteModel]()
+    private var videoGamesViewModel = VideoGamesViewModel()
     var delegate: GameSelectDelegate?
     var chosenGameId = 0
     
     // MARK: - IBOutlets
-    //  @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet weak var headerGamesScroll: UIScrollView!
     @IBOutlet weak var headerGamesPageControl: UIPageControl!
     @IBOutlet weak var gamesCollectionView: UICollectionView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var notFoundLabel: UILabel!
+    @IBOutlet weak var zeroHeightConstraintScrollView: NSLayoutConstraint!
+    @IBOutlet weak var zeroHeightConstraintPageControl: NSLayoutConstraint!
     
     
     // MARK: -  Override Func
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureVideoGamesNetwork()
+        videoGamesViewModel.delegate = self
+        videoGamesViewModel.configureVideoGamesNetwork()
         configureUI()
         configureSearchbar()
+        configureCollectionViewGames()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        // movieDetailVM.delegate = self
         isEmpty = true
         searchBar.text = ""
         gamesCollectionView.reloadData()
@@ -107,25 +110,25 @@ class VideoGamesVC: UIViewController {
         setupSlideScrollView(slides: slides)
     }
     
-    private func configureVideoGamesNetwork() {
-        LoadingIndicator.shared.show()
-        VideoGamesNetwork.shared.getGames { [weak self] (response) in
-            guard let self = self else {return}
-            self.resultsResponse = response.results
-            self.uiResponse = response.results
-            if let results = self.resultsResponse {
-                for index in results.indices  {
-                    self.cityNameIdDictionary[results[index].name ?? ""] = results[index].id
-                }
-            }
-            self.configureCollectionViewGames()
-            self.configurePagerPosters()
-            LoadingIndicator.shared.hide()
-        } failure: { (error) in
-            self.alert(message: error.message)
-            LoadingIndicator.shared.hide()
-        }
-    }
+    //    private func configureVideoGamesNetwork() {
+    //        LoadingIndicator.shared.show()
+    //        VideoGamesNetwork.shared.getGames { [weak self] (response) in
+    //            guard let self = self else {return}
+    //            self.resultsResponse = response.results
+    //            self.uiResponse = response.results
+    //            if let results = self.resultsResponse {
+    //                for index in results.indices  {
+    //                    self.gameNameIdDictionary[results[index].name ?? ""] = results[index].id
+    //                }
+    //            }
+    //            self.configureCollectionViewGames()
+    //            self.configurePagerPosters()
+    //            LoadingIndicator.shared.hide()
+    //        } failure: { (error) in
+    //            self.alert(message: error.message)
+    //            LoadingIndicator.shared.hide()
+    //        }
+    //    }
     
     private func configureGameDetailNetwork(gameId: String) {
         LoadingIndicator.shared.show()
@@ -148,9 +151,10 @@ class VideoGamesVC: UIViewController {
     }
     
     private func configurePagerPosters() {
-        slide1.posterImageView.kf.setImage(with: URL(string: resultsResponse?[0].background_image ?? ""))
-        slide2.posterImageView.kf.setImage(with: URL(string: resultsResponse?[1].background_image ?? ""))
-        slide3.posterImageView.kf.setImage(with: URL(string: resultsResponse?[2].background_image ?? ""))
+        let response = videoGamesViewModel.getAllGames()
+        slide1.posterImageView.kf.setImage(with: URL(string: response[0].background_image))
+        slide2.posterImageView.kf.setImage(with: URL(string: response[1].background_image))
+        slide3.posterImageView.kf.setImage(with: URL(string: response[2].background_image))
         let gesture1 = UITapGestureRecognizer(target: self, action:  #selector(self.gameClicked1))
         let gesture2 = UITapGestureRecognizer(target: self, action:  #selector(self.gameClicked2))
         let gesture3 = UITapGestureRecognizer(target: self, action:  #selector(self.gameClicked3))
@@ -175,13 +179,13 @@ class VideoGamesVC: UIViewController {
     }
     
     @objc private func gameClicked1() {
-        configureGameDetailNetwork(gameId: String(resultsResponse?[0].id ?? 0))
+        configureGameDetailNetwork(gameId: String(videoGamesViewModel.getAllGames()[0].id))
     }
     @objc private func gameClicked2() {
-        configureGameDetailNetwork(gameId: String(resultsResponse?[1].id ?? 0))
+        configureGameDetailNetwork(gameId: String(videoGamesViewModel.getAllGames()[1].id))
     }
     @objc private func gameClicked3() {
-        configureGameDetailNetwork(gameId: String(resultsResponse?[2].id ?? 0))
+        configureGameDetailNetwork(gameId: String(videoGamesViewModel.getAllGames()[2].id))
     }
 }
 
@@ -191,7 +195,7 @@ extension VideoGamesVC: UICollectionViewDelegate {
         collectionView.deselectItem(at: indexPath, animated: true)
         guard let cell = collectionView.cellForItem(at: indexPath) as? VideoGamesCollectionViewCell else {return}
         guard let gameName = cell.gameTitleLabel.text else {return}
-        chosenGameId = cityNameIdDictionary[gameName] ?? 0
+       // chosenGameId = gameNameIdDictionary[gameName] ?? 0
         configureGameDetailNetwork(gameId: String(chosenGameId))
     }
 }
@@ -200,16 +204,15 @@ extension VideoGamesVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AppConstant.collectionViewCellVideoGames, for: indexPath) as! VideoGamesCollectionViewCell
         if headerGamesScroll.isHidden {
-            cell.configure(response: uiResponse?[indexPath.row])
+            cell.configure(viewModel: videoGamesViewModel.searchedGames[indexPath.row])
         } else {
-            cell.configure(response: uiResponse?[indexPath.row + 3])
+            cell.configure(viewModel: videoGamesViewModel.getAllGames()[indexPath.row + 3])
         }
         return cell
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return uiResponse != nil ? uiResponse!.count : 0
+        return headerGamesScroll.isHidden ? videoGamesViewModel.countSearchedGames : videoGamesViewModel.countAllGames
     }
 }
 
@@ -253,26 +256,58 @@ extension VideoGamesVC: UISearchBarDelegate {
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        headerGamesScroll.isHidden = !searchBarIsEmpty()
-        headerGamesPageControl.isHidden = !searchBarIsEmpty()
-        if(searchBarIsEmpty()){
+        getSearchProcess(searchText: searchText)
+    }
+    
+    private func getSearchProcess(searchText: String) {
+        getZeroHeight()
+        if searchText.count > 3 {
+            zeroHeightConstraintScrollView.isActive = true
+            zeroHeightConstraintPageControl.isActive = true
+            hideScroll()
+            self.isEmpty = false
+            videoGamesViewModel.getSearchedGames(searchText: searchText)
+        }
+        if searchBarIsEmpty() {
+            zeroHeightConstraintScrollView.isActive = false
+            zeroHeightConstraintPageControl.isActive = false
+            hideScroll()
             self.isEmpty = true
             searchBar.text = ""
-            showGames(games: resultsResponse)
-        } else {
-            self.isEmpty = false
-            if let resultList = self.resultsResponse?.filter({ (response) -> Bool in
-                (response.name?.lowercased().contains(searchText.lowercased()))!
-            }) {
-                showGames(games: resultList)
-                notFoundLabel.isHidden = resultList.count > 0
-            }
+            self.notFoundLabel.isHidden = true
+            self.gamesCollectionView.reloadData()
         }
     }
     
-    private func showGames(games: [ResultsResponseModel]?) {
-        self.uiResponse = games
+    private func getZeroHeight() {
+        if zeroHeightConstraintScrollView == nil {
+            zeroHeightConstraintScrollView = headerGamesScroll.heightAnchor.constraint(equalToConstant: 0)
+        }
+        
+        if zeroHeightConstraintPageControl == nil {
+            zeroHeightConstraintPageControl = headerGamesPageControl.heightAnchor.constraint(equalToConstant: 0)
+        }
+    }
+    
+    private func hideScroll() {
+        headerGamesScroll.isHidden = !searchBarIsEmpty()
+        headerGamesPageControl.isHidden = !searchBarIsEmpty()
+    }
+}
+
+extension VideoGamesVC: VideoGamesDelegate {
+    func failWith(error: String?) {
+        if let err = error, err != "" {
+            self.alert(message: err)
+            return
+        }
         self.gamesCollectionView.reloadData()
-        self.notFoundLabel.isHidden = true
+        notFoundLabel.isHidden = false
+    }
+    
+    func succes() {
+        self.configurePagerPosters()
+        self.gamesCollectionView.reloadData()
+        notFoundLabel.isHidden = true
     }
 }
