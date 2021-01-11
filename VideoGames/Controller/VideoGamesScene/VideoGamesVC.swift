@@ -159,7 +159,11 @@ class VideoGamesVC: UIViewController {
 extension VideoGamesVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
-        chosenGameId = videoGamesViewModel.getGameId(index: indexPath.row)
+        if headerGamesScroll.isHidden {
+            chosenGameId = videoGamesViewModel.searchedGames[indexPath.row].id
+        } else {
+            chosenGameId = videoGamesViewModel.getAllGames()[indexPath.row + 3].id
+        }
         gameDetailsViewModel.configureGameDetailNetwork(gameId: String(chosenGameId))
     }
 }

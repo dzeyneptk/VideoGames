@@ -65,9 +65,4 @@ class VideoGamesViewModel {
         })
         return viewModel
     }
-    
-    func getGameId(index: Int) -> Int {
-        guard let response = resultsResponseModel else {return 0}
-        return ResultsViewModel(model: response[index]).id
-    }
 }
