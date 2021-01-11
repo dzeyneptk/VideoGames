@@ -17,17 +17,14 @@ protocol GameSelectDelegate {
 class VideoGamesVC: UIViewController {
     
     // MARK: - Private Variables
-   // private var resultsResponse: [ResultsResponseModel]?
-    private var detailResultsResponse: GameDetailResponseModel?
-   // private var uiResponse: [ResultsResponseModel]?
     private var slides : [Slide] = []
     private var slide1 : Slide = Bundle.main.loadNibNamed("Slide", owner: self, options: nil)?.first as! Slide
     private var slide2 : Slide = Bundle.main.loadNibNamed("Slide", owner: self, options: nil)?.first as! Slide
     private var slide3 : Slide = Bundle.main.loadNibNamed("Slide", owner: self, options: nil)?.first as! Slide
-   // private var gameNameIdDictionary = [String: Int]()
     private var isEmpty = true
     private var favoritesArray = [FavoriteModel]()
     private var videoGamesViewModel = VideoGamesViewModel()
+    private var gameDetailsViewModel = GameDetailsViewModel()
     var delegate: GameSelectDelegate?
     var chosenGameId = 0
     
@@ -45,6 +42,7 @@ class VideoGamesVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         videoGamesViewModel.delegate = self
+        gameDetailsViewModel.delegate = self
         videoGamesViewModel.configureVideoGamesNetwork()
         configureUI()
         configureSearchbar()
@@ -110,43 +108,11 @@ class VideoGamesVC: UIViewController {
         setupSlideScrollView(slides: slides)
     }
     
-    //    private func configureVideoGamesNetwork() {
-    //        LoadingIndicator.shared.show()
-    //        VideoGamesNetwork.shared.getGames { [weak self] (response) in
-    //            guard let self = self else {return}
-    //            self.resultsResponse = response.results
-    //            self.uiResponse = response.results
-    //            if let results = self.resultsResponse {
-    //                for index in results.indices  {
-    //                    self.gameNameIdDictionary[results[index].name ?? ""] = results[index].id
-    //                }
-    //            }
-    //            self.configureCollectionViewGames()
-    //            self.configurePagerPosters()
-    //            LoadingIndicator.shared.hide()
-    //        } failure: { (error) in
-    //            self.alert(message: error.message)
-    //            LoadingIndicator.shared.hide()
-    //        }
-    //    }
-    
-    private func configureGameDetailNetwork(gameId: String) {
-        LoadingIndicator.shared.show()
-        VideoGamesNetwork.shared.getGameDetails(gameId) { (response) in
-            self.detailResultsResponse = response
-            LoadingIndicator.shared.hide()
-            self.openDetailVC()
-        } failure: { (error) in
-            self.alert(message: error.message)
-            LoadingIndicator.shared.hide()
-        }
-    }
-    
     private func openDetailVC() {
         guard let detailVC = UIStoryboard(name: "VideoGameDetail", bundle: nil).instantiateViewController(withIdentifier: "Gamedetail") as? VideoGameDetailVC else {return}
         let detailNav = UINavigationController(rootViewController: detailVC)
         detailNav.modalPresentationStyle = .fullScreen
-        detailVC.detailGameResponse = detailResultsResponse
+        detailVC.detailGamesViewModel = gameDetailsViewModel
         self.present(detailNav, animated: true, completion: nil)
     }
     
@@ -179,13 +145,13 @@ class VideoGamesVC: UIViewController {
     }
     
     @objc private func gameClicked1() {
-        configureGameDetailNetwork(gameId: String(videoGamesViewModel.getAllGames()[0].id))
+        gameDetailsViewModel.configureGameDetailNetwork(gameId: String(videoGamesViewModel.getAllGames()[0].id))
     }
     @objc private func gameClicked2() {
-        configureGameDetailNetwork(gameId: String(videoGamesViewModel.getAllGames()[1].id))
+        gameDetailsViewModel.configureGameDetailNetwork(gameId: String(videoGamesViewModel.getAllGames()[1].id))
     }
     @objc private func gameClicked3() {
-        configureGameDetailNetwork(gameId: String(videoGamesViewModel.getAllGames()[2].id))
+        gameDetailsViewModel.configureGameDetailNetwork(gameId: String(videoGamesViewModel.getAllGames()[2].id))
     }
 }
 
@@ -193,10 +159,8 @@ class VideoGamesVC: UIViewController {
 extension VideoGamesVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
-        guard let cell = collectionView.cellForItem(at: indexPath) as? VideoGamesCollectionViewCell else {return}
-        guard let gameName = cell.gameTitleLabel.text else {return}
-       // chosenGameId = gameNameIdDictionary[gameName] ?? 0
-        configureGameDetailNetwork(gameId: String(chosenGameId))
+        chosenGameId = videoGamesViewModel.getGameId(index: indexPath.row)
+        gameDetailsViewModel.configureGameDetailNetwork(gameId: String(chosenGameId))
     }
 }
 // MARK: - UICollectionViewDataSource
@@ -295,6 +259,7 @@ extension VideoGamesVC: UISearchBarDelegate {
     }
 }
 
+// MARK: - VideoGamesDelegate
 extension VideoGamesVC: VideoGamesDelegate {
     func failWith(error: String?) {
         if let err = error, err != "" {
@@ -309,5 +274,19 @@ extension VideoGamesVC: VideoGamesDelegate {
         self.configurePagerPosters()
         self.gamesCollectionView.reloadData()
         notFoundLabel.isHidden = true
+    }
+}
+
+// MARK: - GameDetailsDelegate
+extension VideoGamesVC: GameDetailsDelegate {
+    func fail(error: String?) {
+        if let err = error, err != "" {
+            self.alert(message: err)
+            return
+        }
+    }
+    
+    func succesDetails() {
+        self.openDetailVC()
     }
 }

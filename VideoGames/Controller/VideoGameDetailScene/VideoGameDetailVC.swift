@@ -12,7 +12,7 @@ import CoreData
 class VideoGameDetailVC: UIViewController {
     
     // MARK: - Variables
-    var detailGameResponse: GameDetailResponseModel?
+    var detailGamesViewModel: GameDetailsViewModel?
     private var isFavorite = false
     
     // MARK: - IBOutlets
@@ -33,11 +33,11 @@ class VideoGameDetailVC: UIViewController {
     
     // MARK: Private Functions
     private func configureUI() {
-        gameTitle.text = detailGameResponse?.name
-        relaseDateLabel.text = detailGameResponse?.released
-        ratingLabel.text = String(detailGameResponse?.metacritic ?? 0)
-        gamePosterImageView.kf.setImage(with: URL(string: detailGameResponse?.background_image ?? ""))
-        descriptionTextView.text = detailGameResponse?.description
+        gameTitle.text = detailGamesViewModel?.name
+        relaseDateLabel.text = detailGamesViewModel?.released
+        ratingLabel.text = String(detailGamesViewModel?.metacritic ?? 0)
+        gamePosterImageView.kf.setImage(with: URL(string: detailGamesViewModel?.background_image ?? ""))
+        descriptionTextView.text = detailGamesViewModel?.description
         let gesture = UITapGestureRecognizer(target: self, action:  #selector(self.favoriteClicked))
         self.favoriteImageView.addGestureRecognizer(gesture)
     }
@@ -92,15 +92,15 @@ class VideoGameDetailVC: UIViewController {
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
             let context = appDelegate.persistentContainer.viewContext
             let favorite = NSEntityDescription.insertNewObject(forEntityName: "Favorites", into: context)
-            favorite.setValue(detailGameResponse?.released, forKey: "relasedDate")
-            favorite.setValue(detailGameResponse?.metacritic, forKey: "rating")
-            favorite.setValue(detailGameResponse?.name, forKey: "gameTitle")
-            favorite.setValue(detailGameResponse?.background_image, forKey: "gamePoster")
+            favorite.setValue(detailGamesViewModel?.released, forKey: "relasedDate")
+            favorite.setValue(detailGamesViewModel?.metacritic, forKey: "rating")
+            favorite.setValue(detailGamesViewModel?.name, forKey: "gameTitle")
+            favorite.setValue(detailGamesViewModel?.background_image, forKey: "gamePoster")
             favorite.setValue(true, forKey: "isFavorited")
             
         } else {
             favoriteImageView.image = UIImage(named: "favorite")
-            deleteFavorite(gameTitle: detailGameResponse?.name ?? "")
+            deleteFavorite(gameTitle: detailGamesViewModel?.name ?? "")
         }
     }
 }
